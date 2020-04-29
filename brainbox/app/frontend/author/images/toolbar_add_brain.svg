@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="55px" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>toolbar_add_brain</title>
+    <desc>Created with Sketch.</desc>
+    <g id="toolbar_add_brain" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="+" font-family="72-Regular, 72" font-size="32" font-weight="normal" fill="#4A4A4A">
+            <tspan x="4" y="48">+</tspan>
+        </text>
+        <path d="M26.3662109,5 L40.6666667,5 C42.5076158,5 44,6.47940691 44,8.30434783 L44,39.6956522 C44,41.5205931 42.5076158,43 40.6666667,43 L17.3333333,43 C15.4923842,43 14,41.5205931 14,39.6956522 L14,27.4707031" id="Rectangle-7" stroke="#4A4A4A" stroke-width="2" stroke-linecap="round" transform="translate(29.000000, 24.000000) rotate(-90.000000) translate(-29.000000, -24.000000) "></path>
+        <rect id="Rectangle" fill="#4A4A4A" x="33" y="15" width="8" height="9" rx="1"></rect>
+        <path d="M18.5,28.5 C34.046875,28.5 20.5146484,19.5 33.1582031,19.5" id="Line" stroke="#4A4A4A" stroke-width="2" stroke-linecap="square"></path>
+    </g>
+</svg>

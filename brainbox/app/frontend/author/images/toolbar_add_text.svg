@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="55px" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 63 (92445) - https://sketch.com -->
+    <title>toolbar_add_text</title>
+    <desc>Created with Sketch.</desc>
+    <g id="toolbar_add_text" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="+" font-family="72-Regular, 72" font-size="32" font-weight="normal" fill="#4A4A4A">
+            <tspan x="30" y="48">+</tspan>
+        </text>
+        <path d="M17.4257813,37 L20.203125,29.6171875 L31.7695313,29.6171875 L33.3125,34.0043945 L35.730957,34.0043945 L27.3222656,12.2324219 L24.703125,12.2324219 L15.0703125,37 L17.4257813,37 Z M31.0488281,27.6660156 L20.9414062,27.6660156 L24.4042969,18.4726562 C24.7675781,17.5703125 25.1103516,16.6767578 25.4326172,15.7919922 C25.7548828,14.9072266 25.9453125,14.3417969 26.0039062,14.0957031 C26.0742188,14.3535156 26.2675781,14.9248047 26.5839844,15.8095703 C26.9003906,16.6943359 27.234375,17.5761719 27.5859375,18.4550781 L31.0488281,27.6660156 Z" id="A" fill="#4A4A4A" fill-rule="nonzero"></path>
+    </g>
+</svg>

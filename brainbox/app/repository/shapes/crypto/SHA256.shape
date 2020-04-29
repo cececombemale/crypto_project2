@@ -1,0 +1,257 @@
+{
+  "draw2d": [
+    {
+      "type": "shape_designer.figure.PolyRect",
+      "id": "c8ded3b2-9ed6-9e0c-4699-5f45481c7fe1",
+      "x": 7949.5,
+      "y": 7960.5,
+      "width": 101,
+      "height": 70,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "Rectangle",
+        "baseClass": "draw2d.SetFigure",
+        "code": "/**\n * Generated Code for the Draw2D touch HTML5 lib.\n * File will be generated if you save the *.shape file.\n *\n * by 'Draw2D Shape Designer'\n *\n * Custom JS code to tweak the standard behaviour of the generated\n * shape. add your custom code and event handler here.\n *\n * Looks disconcerting - extending my own class. But this is a good method to\n * merge basic code and override them with custom methods.\n */\ntestShape = testShape.extend({\n\n    init: function(attr, setter, getter){\n         this._super(attr, setter, getter);\n\n         // your special code here\n    },\n\n    /**\n     *  Called by the simulator for every calculation\n     *  loop\n     *  @param {Object} context context where objects can store or handover global variables to other objects.\n     *  @required\n     **/\n    calculate:function( context)\n    {\n        var input = this.getInputPort(0).getValue();\n        var output = this.getOutputPort(0);\n        var bitArray = sjcl.hash.sha256.hash(input);  \n        var hash = sjcl.codec.hex.fromBits(bitArray);\n        output.setValue(hash);\n    },\n\n\n    /**\n     *  Called if the simulation mode is starting\n     *  @required\n     **/\n    onStart:function( context )\n    {\n    },\n\n    /**\n     *  Called if the simulation mode is stopping\n     *  @required\n     **/\n    onStop:function( context )\n    {\n    },\n\n    /**\n     * Get the simulator a hint which kind of hardware the shapes requires or supports\n     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost\n     * and your are running a circuit which needs this kind of hardware...\n     **/\n    getRequiredHardware: function(){\n      return {\n        raspi: false,\n        arduino: false\n      }\n    }\n\n});"
+      },
+      "cssClass": "shape_designer_figure_PolyRect",
+      "ports": [],
+      "bgColor": "rgba(255,255,255,1)",
+      "color": "rgba(48,48,48,1)",
+      "stroke": 1,
+      "radius": 0,
+      "dasharray": null,
+      "vertices": [
+        {
+          "x": 7949.5,
+          "y": 7960.5
+        },
+        {
+          "x": 8050.5,
+          "y": 7960.5
+        },
+        {
+          "x": 8050.5,
+          "y": 8030.5
+        },
+        {
+          "x": 7949.5,
+          "y": 8030.5
+        }
+      ],
+      "blur": 0,
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.SizeFilter"
+        },
+        {
+          "name": "shape_designer.filter.StrokeFilter"
+        },
+        {
+          "name": "shape_designer.filter.FillColorFilter"
+        }
+      ]
+    },
+    {
+      "type": "shape_designer.figure.ExtPort",
+      "id": "9aca343a-66ec-7f4b-0428-a8307d868db0",
+      "x": 7944.5,
+      "y": 8002.25,
+      "width": 10,
+      "height": 10,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "input",
+        "type": "Input",
+        "direction": 3,
+        "fanout": 20
+      },
+      "cssClass": "shape_designer_figure_ExtPort",
+      "ports": [],
+      "bgColor": "rgba(55,177,222,1)",
+      "color": "rgba(27,27,27,1)",
+      "stroke": 1,
+      "dasharray": null,
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.FanoutFilter"
+        },
+        {
+          "name": "shape_designer.filter.PortDirectionFilter"
+        },
+        {
+          "name": "shape_designer.filter.PortTypeFilter"
+        }
+      ]
+    },
+    {
+      "type": "shape_designer.figure.ExtPort",
+      "id": "f6e0bd4b-20ad-da29-830b-caf7c0977734",
+      "x": 8045.5,
+      "y": 8002.25,
+      "width": 10,
+      "height": 10,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "Port",
+        "type": "Output",
+        "direction": 1,
+        "fanout": 20
+      },
+      "cssClass": "shape_designer_figure_ExtPort",
+      "ports": [],
+      "bgColor": "rgba(55,177,222,1)",
+      "color": "rgba(27,27,27,1)",
+      "stroke": 1,
+      "dasharray": null,
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.FanoutFilter"
+        },
+        {
+          "name": "shape_designer.filter.PortDirectionFilter"
+        },
+        {
+          "name": "shape_designer.filter.PortTypeFilter"
+        }
+      ]
+    },
+    {
+      "type": "shape_designer.figure.ExtLabel",
+      "id": "b11943cf-08b4-c273-cbcb-f117688451f8",
+      "x": 7964.703125,
+      "y": 7965.5,
+      "width": 45.25,
+      "height": 21,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "Label"
+      },
+      "cssClass": "shape_designer_figure_ExtLabel",
+      "ports": [],
+      "bgColor": "rgba(0,0,0,0)",
+      "color": "rgba(27,27,27,1)",
+      "stroke": 0,
+      "radius": 0,
+      "dasharray": null,
+      "text": "SHA256",
+      "outlineStroke": 0,
+      "outlineColor": "rgba(0,0,0,0)",
+      "fontSize": 16,
+      "fontColor": "rgba(8,8,8,1)",
+      "fontFamily": null,
+      "editor": "LabelInplaceEditor",
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontSizeFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontColorFilter"
+        }
+      ]
+    },
+    {
+      "type": "shape_designer.figure.ExtLabel",
+      "id": "96098efa-5bc6-0ab6-e3ea-53c3684a813f",
+      "x": 7955.5,
+      "y": 7996.5,
+      "width": 29.6875,
+      "height": 21,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "Label"
+      },
+      "cssClass": "shape_designer_figure_ExtLabel",
+      "ports": [],
+      "bgColor": "rgba(0,0,0,0)",
+      "color": "rgba(27,27,27,1)",
+      "stroke": 0,
+      "radius": 0,
+      "dasharray": null,
+      "text": "input",
+      "outlineStroke": 0,
+      "outlineColor": "rgba(0,0,0,0)",
+      "fontSize": 12,
+      "fontColor": "rgba(8,8,8,1)",
+      "fontFamily": null,
+      "editor": "LabelInplaceEditor",
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontSizeFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontColorFilter"
+        }
+      ]
+    },
+    {
+      "type": "shape_designer.figure.ExtLabel",
+      "id": "6b1d7ac9-dda0-ac20-d97a-f5ba67b9107a",
+      "x": 8013.46875,
+      "y": 7996.5,
+      "width": 29.6875,
+      "height": 21,
+      "alpha": 1,
+      "selectable": true,
+      "draggable": true,
+      "angle": 0,
+      "userData": {
+        "name": "Label"
+      },
+      "cssClass": "shape_designer_figure_ExtLabel",
+      "ports": [],
+      "bgColor": "rgba(0,0,0,0)",
+      "color": "rgba(27,27,27,1)",
+      "stroke": 0,
+      "radius": 0,
+      "dasharray": null,
+      "text": "hash",
+      "outlineStroke": 0,
+      "outlineColor": "rgba(0,0,0,0)",
+      "fontSize": 12,
+      "fontColor": "rgba(8,8,8,1)",
+      "fontFamily": null,
+      "editor": "LabelInplaceEditor",
+      "filters": [
+        {
+          "name": "shape_designer.filter.PositionFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontSizeFilter"
+        },
+        {
+          "name": "shape_designer.filter.FontColorFilter"
+        }
+      ]
+    }
+  ]
+}

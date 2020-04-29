@@ -1,0 +1,227 @@
+﻿<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<title>Brainbox User Management</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="viewport" content="width=device-width, minimum-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <link rel="icon" type="image/png"    href="../_common/images/favicon_64x64.png" sizes="64x64">
+  <link rel="icon" type="image/png"    href="../_common/images/favicon_48x48.png" sizes="48x48">
+  <link rel="icon" type="image/png"    href="../_common/images/favicon_32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png"    href="../_common/images/favicon_16x16.png" sizes="16x16">
+  <link href="../_common/css/loader.css" rel='stylesheet' type='text/css'/>
+
+</head>
+
+<body id="container">
+
+<div id="layout">
+
+  <ul class="nav nav-tabs" id="leftTabStrip">
+    <li id="editor_tab"  class="active">
+      <a href="#editor" class="leftTab editor" data-toggle="tab">
+        <img class="icon svg" src="../_common/images/navigation_edit.svg"/>
+      </a>
+    </li>
+
+    <li id="index_tab">
+      <a href="#home" class="leftTab home" data-toggle="tab">
+        <img class="icon svg" src="../_common/images/navigation_index.svg"/>
+      </a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+
+
+    <div class="tab-pane active" id="editor">
+      <div class="workspace">
+
+        <div class="toolbar navbar-default">
+           <span class="group" id="editorgroup_fileoperations">
+              <span class="image-button disabled" id="editorFileSave" >
+                <img title="Save circuit" src="../_common/images/toolbar_save.svg"/>
+                <div>Save</div>
+              </span>
+              <span class="image-button" id="editorAdd">
+                <img  src="../_common/images/toolbar_insert.svg"/>
+                <div>Add</div>
+              </span>
+           </span>
+
+           <span class="group">
+              <span class="image-button disabled" id="editorDelete">
+                <img  src="../_common/images/toolbar_delete.svg"/>
+                <div>Delete</div>
+              </span>
+           </span>
+
+           <span class="group applicationSwitch">
+                <label class="dropdown" >
+                  <span class="image-button"  data-toggle="dropdown">
+                    <img  src="../_common/images/toolbar_app_switch.svg"/>
+                  </span>
+                  <ul class="dropdown-menu" role="menu" >
+                      <form class="form-horizontal" role="form">
+
+                        <label class="applicationSwitchSimulator image-button">
+                          <img src="../_common/images/app_simulator.svg"/>
+                          <div>Circuit<br>Simulator</div>
+                        </label>
+
+                        <label class="applicationSwitchDesigner image-button" >
+                          <img src="../_common/images/app_designer.svg"/>
+                          <div>Shape<br>Designer</div>
+                        </label>
+
+                        <label class="applicationSwitchAuthor image-button" >
+                           <img src="../_common/images/app_lessons.svg"/>
+                           <div>Lesson<br>Author</div>
+                        </label>
+
+                      </form>
+                  </ul>
+                </label>
+
+                <label class="userinfo_toggler dropdown" >
+                  <span class="image-button" data-toggle="dropdown">
+                    <img  src="../_common/images/toolbar_user.svg"/>
+                  </span>
+
+                  <div class="dropdown-menu" role="menu" >
+                  </div>
+                </label>
+
+              </span>
+        </div>
+
+        <div class="paletteContainer">
+          <div id="paletteHeader">
+            <div class="paletteTitle">
+              <a href="https://freegroup.github.io/brainbox/" target="_blank"><img src="../_common/images/favicon_64x64.svg"/></a>
+              <div>
+                <h1>Brainbox</h1>
+                <h2>User Admin</h2>
+              </div>
+            </div>
+            <div id="paletteFilter"></div>
+          </div>
+          <div id="paletteElementsScroll">
+            <div id="paletteElements" class="row">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="content">
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<script id="userlistTemplate" type="text/x-jsrender">
+{{#users}}
+    <div class="paletteItem {{role}}" data-id="{{id}}">
+      {{username}}
+    </div>
+{{/users}}
+</script>
+
+
+<script id="userformTemplate" type="text/x-jsrender">
+
+  <div class="form">
+      <input type="hidden" id="userId" value="{{user.id}}" data-id="id">
+
+      {{#user.username}}
+      <div class="form-group">
+        <label for="userUsername">Login Name</label>
+        <input class="form-control" id="userUsername" placeholder="user name" value="{{user.username}}" readonly>
+        <small id="usernameHelp" class="form-text text-muted"></small>
+      </div>
+      {{/user.username}}
+      {{^user.username}}
+      <div class="form-group">
+        <label for="userUsername">User Name</label>
+        <input class="form-control" id="userUsername" placeholder="user name" value="{{user.username}}" data-id="username">
+        <small id="usernameHelp" class="form-text text-muted">required</small>
+      </div>
+      {{/user.username}}
+
+      <div class="form-group">
+        <label for="userDisplayName">Display Name</label>
+        <input class="form-control" id="userDisplayName" placeholder="user name" value="{{user.displayName}}" data-id="displayName">
+        <small id="displayNameHelp" class="form-text text-muted"></small>
+      </div>
+
+      <div class="form-group">
+        <label for="userEmail">E-Mail</label>
+        <input class="form-control" id="userEmail" placeholder="user name" value="{{user.email}}" data-id="email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+
+      {{^user.username}}
+      <div class="form-group">
+        <label for="userPassword">Password</label>
+        <input class="form-control" id="userPassword" placeholder="password" value="" data-id="password">
+        <small id="passwordHelp" class="form-text text-muted">required</small>
+      </div>
+      {{/user.username}}
+
+
+      <div class="form-group">
+        <label for="sel1">Role:</label>
+        <select class="form-control" id="sel1" value="{{user.role}}" style="width:auto" data-id="role">
+          {{#options}}
+          <option {{selected}} value="{{val}}" >{{label}}</option>
+          {{/options}}
+        </select>
+      </div>
+
+      {{#user.username}}
+        <button id="passwordReset">Password Reset Link</button>
+      {{/user.username}}
+  </div>
+</script>
+
+
+
+<div class="loader">
+  <div class="title">Loading the Admin Console...</div>
+  <div class="gooey">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+</body>
+
+<link href='//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100,900' rel='stylesheet' type='text/css'>
+<link href='../_common/js/bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<link href="../_common/js/anno.js/anno.css" rel='stylesheet' type='text/css'/>
+
+<!-- "include" files in a world of ES6 is not perfect. Unfortunately draw2d.js isn't complete
+     ES6 and therefore I run into some compatibility issues with jQuery and prerequisite
+-->
+<script src="../_common/js/jquery/jquery.js"></script>
+<script src="../_common/js/jquery/jquery-ui.js"></script>
+
+<script src="../_common/js/bootstrap/js/bootstrap.min.js"></script>
+<script src="../_common/js/bootbox/bootbox.min.js"></script>
+
+<script src="../_common/js/anno.js/anno.js"></script>
+<script src="../_common/js/sjcl/sjcl.js"></script>
+<script src="../socket.io/socket.io.js"></script>
+<SCRIPT src="./js/webpack/bundle.js"></SCRIPT>
+
+</html>

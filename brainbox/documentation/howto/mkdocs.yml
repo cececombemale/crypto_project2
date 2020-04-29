@@ -1,0 +1,11 @@
+site_name: Brainbox Getting Started Guide
+site_dir : ../../dist/howto
+
+pages:
+ - About : index.md
+ - Getting Startet: startet/index.md
+ - Platform : platforms/index.md
+
+theme: material
+
+extra_css: [extra.css]

@@ -1,0 +1,8 @@
+documentation
+resources
+sessions
+assets
+node_modules
+.idea
+README.md
+webpack.config.js

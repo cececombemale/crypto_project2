@@ -1,0 +1,279 @@
+* { box-sizing:border-box; }
+
+body {
+  font-family: Helvetica;
+  background: #eee;
+  background-image: url(../images/background.png);
+  background-size: cover;
+}
+
+hgroup {
+  text-align:center;
+  margin-top: 4em;
+  h1 {
+    background-color: @tintColor;
+    display: inline;
+    color: white;
+    font-weight: 100;
+    padding-left: 10px;
+    padding-right: 10px;
+    letter-spacing: 4px;
+  }
+  h3 {
+    font-weight: 400;
+    font-size:14px;
+    letter-spacing: 4px;
+    padding-bottom:5px;
+    margin-top:20px;
+  }
+}
+
+
+.form {
+  position:relative;
+  width: 380px;
+  margin: 4em auto;
+  padding: 3em 2em 2em 2em;
+  background: rgba(250, 250, 250, 0.85);
+  border: 1px solid #14a1af;
+  border-radius: 3px;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+
+
+  .testLink{
+    float:right;
+    color:@tintColor;
+    text-decoration: none;
+  }
+
+  .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(254, 254, 254, 0.91);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: @tintColor;
+    font-weight: 400;
+    font-size: 21px;
+    div{
+      text-align: center;
+    }
+
+    a{
+      display: block;
+      float: right;
+      padding: 20px;
+    }
+  }
+
+
+}
+
+.button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  margin: .3em 0 0 0;
+  width: 100%;
+  vertical-align: middle;
+  color: #fff;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 1px;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid darken(@tintColor, 5%);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: @tintColor;
+  text-shadow: 2px 2px 0 darken(@tintColor, 5%);
+  &:hover {
+    background: lighten(@tintColor, 10%);
+    color:white;
+    text-decoration: none;
+  }
+  &:focus {
+    outline: 0;
+  }
+}
+
+
+.group {
+  position: relative;
+  margin-bottom: 45px;
+}
+
+input {
+  font-size: 18px;
+  padding: 10px 10px 10px 5px;
+  -webkit-appearance: none;
+  display: block;
+  background: transparent;
+  color: #636363;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #757575;
+}
+
+input:focus { outline: none; }
+
+
+/* Label */
+
+label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: all 0.2s ease;
+}
+
+
+/* active */
+
+input:focus ~ label, input.used ~ label {
+  top: -20px;
+  transform: scale(.75); left: -2px;
+  /* font-size: 14px; */
+  color: rgba(0,0,0,0.2);
+}
+
+
+/* Underline */
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before, .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 0px;
+  position: absolute;
+  background: @tintColor;
+  transition: all 0.2s ease;
+}
+
+.bar:before { left: 50%; }
+
+.bar:after { right: 50%; }
+
+
+/* active */
+
+input:focus ~ .bar:before, input:focus ~ .bar:after { width: 50%; }
+
+
+/* Highlight */
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+
+/* active */
+
+input:focus ~ .highlight {
+  animation: inputHighlighter 0.3s ease;
+}
+
+
+/* Animations */
+
+@keyframes inputHighlighter {
+  from { background: @tintColor; }
+  to 	{ width: 0; background: transparent; }
+}
+
+
+
+/* Ripples container */
+
+.ripples {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+
+/* Ripples circle */
+
+.ripplesCircle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.ripples.is-active .ripplesCircle {
+  animation: ripples .4s ease-in;
+}
+
+
+/* Ripples animation */
+
+@keyframes ripples {
+  0% { opacity: 0; }
+
+  25% { opacity: 1; }
+
+  100% {
+    width: 200%;
+    padding-bottom: 200%;
+    opacity: 0;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #dd6288;
+  background-color:rgba(211, 211, 211, 0.3);
+  padding: 0;
+  p {
+    font-size: 13px;
+    letter-spacing: .4px;
+    margin:0px;
+    padding:0px;
+  }
+  a {
+    color: @tintColor;
+    text-decoration: none;
+    transition: all .2s ease;
+    &:hover {
+      color: #666;
+      text-decoration: underline;
+    }
+  }
+}
