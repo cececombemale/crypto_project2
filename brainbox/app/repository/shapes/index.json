@@ -26,6 +26,21 @@
     "image": "crypto/SHA256.png"
   },
   {
+    "name": "db_add_key_value",
+    "tags": [
+      "db",
+      "add",
+      "key",
+      "value"
+    ],
+    "version": "local-version",
+    "basename": "add_key_value.js",
+    "displayName": "add_key_value",
+    "basedir": "db",
+    "filePath": "db/add_key_value.shape",
+    "image": "db/add_key_value.png"
+  },
+  {
     "name": "documentation_Markdown",
     "tags": [
       "documentation",

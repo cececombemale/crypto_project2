@@ -39,17 +39,17 @@ var crypto_SaltGenerator = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L204,0 L204,98 L0,98");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L204 0L204 98L0 98Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'SaltGen');
        shape.attr({"x":67,"y":47.5,"text-anchor":"start","text":"SaltGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -168,27 +168,27 @@ var crypto_SHA256 = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L101,0 L101,70 L0,70");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L101 0L101 70L0 70Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'SHA256');
        shape.attr({"x":19.203125,"y":17.5,"text-anchor":"start","text":"SHA256","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'input');
        shape.attr({"x":10,"y":47,"text-anchor":"start","text":"input","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'hash');
        shape.attr({"x":67.96875,"y":47,"text-anchor":"start","text":"hash","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -224,9 +224,181 @@ crypto_SHA256 = crypto_SHA256.extend({
     {
         var input = this.getInputPort(0).getValue();
         var output = this.getOutputPort(0);
-        var bitArray = sjcl.hash.sha256.hash(input);
+        var bitArray = sjcl.hash.sha256.hash(input);  
         var hash = sjcl.codec.hex.fromBits(bitArray);
         output.setValue(hash);
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
+var db_add_key_value = CircuitFigure.extend({
+
+   NAME: "db_add_key_value",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:301,height:257},attr), setter, getter);
+     var port;
+     // db
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: -0.33222591362126247, y: 19.260700389105057 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("db");
+     port.setMaxFanOut(20);
+     // key
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: -0.33222591362126247, y: 43.3852140077821 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("key");
+     port.setMaxFanOut(20);
+     // value
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: -0.33222591362126247, y: 69.06614785992218 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("value");
+     port.setMaxFanOut(20);
+     // modified_db
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 99.83388704318938, y: 50.19455252918288 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("modified_db");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 301;
+      this.originalHeight= 257;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L301,0 L301,257 L0,257");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 0L301 0L301 257L0 257Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'DB');
+       shape.attr({"x":13,"y":48,"text-anchor":"start","text":"DB","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'key');
+       shape.attr({"x":11.6640625,"y":110.1875,"text-anchor":"start","text":"key","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'value');
+       shape.attr({"x":11.6640625,"y":176,"text-anchor":"start","text":"value","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Updated DB');
+       shape.attr({"x":198.828125,"y":127.09375,"text-anchor":"start","text":"Updated DB","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Add to DB');
+       shape.attr({"x":88,"y":86.5,"text-anchor":"start","text":"Add to DB","font-family":"\"Arial\"","font-size":24,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+db_add_key_value = db_add_key_value.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+        var db = this.getInputPort("db").getValue();
+        var key = this.getInputPort("key").getValue();
+        var value = this.getInputPort("value").getValue();
+        var modified_db_port = this.getOutputPort("modified_db");
+        var modified_db = {};
+    
+        if(typeof db === "object"){
+        
+            for(var k in db){
+                modified_db[k] = db[k];
+            }
+            modified_db[key] = value;
+        
+            modified_db_port.setValue(modified_db);
+        }
     },
 
 
@@ -433,32 +605,32 @@ var text_concatenate = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L121,0 L121,75 L0,75");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L121 0L121 75L0 75Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'Concatenate');
        shape.attr({"x":14.205850000000282,"y":12.5,"text-anchor":"start","text":"Concatenate","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'first');
        shape.attr({"x":7.205850000000282,"y":37,"text-anchor":"start","text":"first","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'last');
        shape.attr({"x":8.205850000000282,"y":61,"text-anchor":"start","text":"last","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'firstlast');
        shape.attr({"x":72.90897500000028,"y":50,"text-anchor":"start","text":"firstlast","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -494,8 +666,8 @@ text_concatenate = text_concatenate.extend({
         let first = this.getInputPort("first").getValue();
         let last = this.getInputPort("last").getValue();
         let outputPort = this.getOutputPort("output")
-
-        outputPort.setValue(first + last);
+      
+        outputPort.setValue(first + last);  
     },
 
 
@@ -572,17 +744,17 @@ var text_display = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L82.21600000000035,0 L82.21600000000035,67 L0,67");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // label
        shape = this.canvas.paper.text(0,0,'???');
        shape.attr({"x":58.18475000000035,"y":34.16705000000002,"text-anchor":"start","text":"???","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'📺');
        shape.attr({"x":4,"y":33.5,"text-anchor":"start","text":"📺","font-family":"\"Arial\"","font-size":50,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -608,7 +780,7 @@ text_display = text_display.extend({
          // your special code here
         this.attr({resizeable:false});
         this.installEditPolicy(new draw2d.policy.figure.AntSelectionFeedbackPolicy());
-
+        
         var _this = this;
 
         // get the connected port and forward the port to the related party ( SignalSource shape)
@@ -714,27 +886,27 @@ var text_equal = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L121,0 L121,53 L0,53");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L121 0L121 53L0 53Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'Equal?');
        shape.attr({"x":61.09647500000028,"y":26.59375,"text-anchor":"start","text":"Equal?","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'input1');
        shape.attr({"x":8.205850000000282,"y":15.75,"text-anchor":"start","text":"input1","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'input2');
        shape.attr({"x":8.205850000000282,"y":39.75,"text-anchor":"start","text":"input2","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -771,8 +943,8 @@ text_equal = text_equal.extend({
         let input2 = this.getInputPort("input2").getValue();
         console.log("hello");
         let outputPort = this.getOutputPort("output")
-
-        outputPort.setValue(input1 == input2);
+      
+        outputPort.setValue(input1 == input2);  
     },
 
 
@@ -848,17 +1020,17 @@ var text_input = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L66.9765625,0 L66.9765625,64 L0,64");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // label
        shape = this.canvas.paper.text(0,0,'???');
        shape.attr({"x":41.2734375,"y":32,"text-anchor":"start","text":"???","font-family":"\"Arial\"","font-size":13,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'✎');
        shape.attr({"x":4,"y":32,"text-anchor":"start","text":"✎","font-family":"\"Arial\"","font-size":50,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -883,13 +1055,13 @@ text_input = text_input.extend({
 
         this.attr({resizeable:false});
         this.installEditPolicy(new draw2d.policy.figure.AntSelectionFeedbackPolicy());
-
+        
         var _this = this;
-
+             
         this.on("change:userData.value",function(emitter, event){
             _this.layerAttr("label", {text: event.value});
         });
-
+        
         this.on("added", function(){
             var value = _this.attr("userData.value");
             _this.layerAttr("label", {text: value});
@@ -934,7 +1106,7 @@ text_input = text_input.extend({
             }
         }];
     },
-
+    
     /**
      * Get the simulator a hint which kind of hardware the shapes requires or supports
      * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
@@ -997,17 +1169,17 @@ var text_length = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L80,0 L80,26 L0,26");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L80 0L80 26L0 26Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'Length');
        shape.attr({"x":15.205850000000282,"y":12.6875,"text-anchor":"start","text":"Length","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
@@ -1042,8 +1214,8 @@ text_length = text_length.extend({
     {
         let input = this.getInputPort(0).getValue();
         let outputPort = this.getOutputPort(0);
-
-        outputPort.setValue(input.length);
+      
+        outputPort.setValue(input.length);  
     },
 
 
@@ -1137,37 +1309,37 @@ var text_split = CircuitFigure.extend({
        shape = this.canvas.paper.path("M0,0 L121,0 L121,75 L0,75");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
-
+       
        // Rectangle
        shape = this.canvas.paper.path('M0 0L121 0L121 75L0 75Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'Split');
        shape.attr({"x":44.9375,"y":12.59375,"text-anchor":"start","text":"Split","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'text');
        shape.attr({"x":8.205850000000282,"y":37,"text-anchor":"start","text":"text","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'left_length');
        shape.attr({"x":8.205850000000282,"y":61,"text-anchor":"start","text":"left_length","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'left');
        shape.attr({"x":96.20585000000028,"y":37,"text-anchor":"start","text":"left","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
        // Label
        shape = this.canvas.paper.text(0,0,'right');
        shape.attr({"x":89.328125,"y":61.015625,"text-anchor":"start","text":"right","font-family":"\"Arial\"","font-size":12,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
-
+       
 
        return this.canvas.paper.setFinish();
    }
