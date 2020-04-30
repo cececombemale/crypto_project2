@@ -23,14 +23,12 @@ text_display = text_display.extend({
 
         // get the connected port and forward the port to the related party ( SignalSource shape)
         //
-        var port = this.getInputPort(0);
-        port.setConnectionDirection(0);
-        port.on("change:value", function(emitter, event){
+        this.getInputPort(0).on("change:value", function(emitter, event){
             var foo = _this.getInputPort(0).getValue();
             console.log(foo);
             console.log(typeof foo);
-           _this.layerAttr("label", {text: event.value})
-        });
+           _this.layerAttr("label", {text: JSON.stringify(event.value)})
+        })
     },
 
     /**

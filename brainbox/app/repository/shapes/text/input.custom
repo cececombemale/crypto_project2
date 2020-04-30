@@ -38,7 +38,7 @@ text_input = text_input.extend({
      **/
     calculate:function(context)
     {
-        this.getOutputPort(0).setValue(this.attr("userData.value")) 
+        this.getOutputPort(0).setValue(JSON.parse(this.attr("userData.value")));
     },
 
     /**

@@ -13,10 +13,10 @@ var text_input = CircuitFigure.extend({
    {
      var _this = this;
 
-     this._super( $.extend({stroke:0, bgColor:null, width:68.09375,height:64},attr), setter, getter);
+     this._super( $.extend({stroke:0, bgColor:null, width:66.9765625,height:64},attr), setter, getter);
      var port;
      // Port
-     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 36.43873336392841, y: 98.4375 }));
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 35.37851393911116, y: 97.65625 }));
      port.setConnectionDirection(2);
      port.setBackgroundColor("#37B1DE");
      port.setName("Port");
@@ -26,7 +26,7 @@ var text_input = CircuitFigure.extend({
    createShapeElement : function()
    {
       var shape = this._super();
-      this.originalWidth = 68.09375;
+      this.originalWidth = 66.9765625;
       this.originalHeight= 64;
       return shape;
    },
@@ -36,13 +36,13 @@ var text_input = CircuitFigure.extend({
        this.canvas.paper.setStart();
        var shape = null;
        // BoundingBox
-       shape = this.canvas.paper.path("M0,0 L68.09375,0 L68.09375,64 L0,64");
+       shape = this.canvas.paper.path("M0,0 L66.9765625,0 L66.9765625,64 L0,64");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
        
        // label
        shape = this.canvas.paper.text(0,0,'???');
-       shape.attr({"x":42.390625,"y":32.5,"text-anchor":"start","text":"???","font-family":"\"Arial\"","font-size":13,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":41.2734375,"y":32,"text-anchor":"start","text":"???","font-family":"\"Arial\"","font-size":13,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","label");
        
        // Label
@@ -95,7 +95,7 @@ text_input = text_input.extend({
      **/
     calculate:function(context)
     {
-        this.getOutputPort(0).setValue(this.attr("userData.value")) 
+        this.getOutputPort(0).setValue(JSON.parse(this.attr("userData.value")));
     },
 
     /**

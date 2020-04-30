@@ -13,11 +13,11 @@ var text_display = CircuitFigure.extend({
    {
      var _this = this;
 
-     this._super( $.extend({stroke:0, bgColor:null, width:82.21600000000035,height:64},attr), setter, getter);
+     this._super( $.extend({stroke:0, bgColor:null, width:82.21600000000035,height:67},attr), setter, getter);
      var port;
      // port_a
-     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 36.18517076967971, y: -4.6875 }));
-     port.setConnectionDirection(3);
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 36.18517076967971, y: -4.477611940298508 }));
+     port.setConnectionDirection(0);
      port.setBackgroundColor("#37B1DE");
      port.setName("port_a");
      port.setMaxFanOut(20);
@@ -27,7 +27,7 @@ var text_display = CircuitFigure.extend({
    {
       var shape = this._super();
       this.originalWidth = 82.21600000000035;
-      this.originalHeight= 64;
+      this.originalHeight= 67;
       return shape;
    },
 
@@ -36,7 +36,7 @@ var text_display = CircuitFigure.extend({
        this.canvas.paper.setStart();
        var shape = null;
        // BoundingBox
-       shape = this.canvas.paper.path("M0,0 L82.21600000000035,0 L82.21600000000035,64 L0,64");
+       shape = this.canvas.paper.path("M0,0 L82.21600000000035,0 L82.21600000000035,67 L0,67");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
        
@@ -47,7 +47,7 @@ var text_display = CircuitFigure.extend({
        
        // Label
        shape = this.canvas.paper.text(0,0,'📺');
-       shape.attr({"x":4,"y":32,"text-anchor":"start","text":"📺","font-family":"\"Arial\"","font-size":50,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":4,"y":33.5,"text-anchor":"start","text":"📺","font-family":"\"Arial\"","font-size":50,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
 
@@ -80,14 +80,12 @@ text_display = text_display.extend({
 
         // get the connected port and forward the port to the related party ( SignalSource shape)
         //
-        var port = this.getInputPort(0);
-        port.setConnectionDirection(0);
-        port.on("change:value", function(emitter, event){
+        this.getInputPort(0).on("change:value", function(emitter, event){
             var foo = _this.getInputPort(0).getValue();
             console.log(foo);
             console.log(typeof foo);
-           _this.layerAttr("label", {text: event.value})
-        });
+           _this.layerAttr("label", {text: JSON.stringify(event.value)})
+        })
     },
 
     /**
