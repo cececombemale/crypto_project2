@@ -1,5 +1,18 @@
 [
   {
+    "name": "crypto_HMAC",
+    "tags": [
+      "crypto",
+      "HMAC"
+    ],
+    "version": "local-version",
+    "basename": "HMAC.js",
+    "displayName": "HMAC",
+    "basedir": "crypto",
+    "filePath": "crypto/HMAC.shape",
+    "image": "crypto/HMAC.png"
+  },
+  {
     "name": "crypto_SaltGenerator",
     "tags": [
       "crypto",
