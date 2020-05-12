@@ -32,6 +32,6 @@ Open a second console and run:
 ```
 yarn dev
 ```
-### Open localhost on the browser
+### Open localhost on your browser
 http://localhost:7400/
 
