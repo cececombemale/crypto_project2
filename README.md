@@ -10,8 +10,8 @@ Expressive Cryptography ft. Brainbox is an interactive GUI where the user can im
 
 ## Dependencies
 The project has the following dependencies:
-Node version: 11.15.0
-Yarn version: 1.22.4
+* Node version: 11.15.0
+* Yarn version: 1.22.4
 
 ## Run from Source Code
 
