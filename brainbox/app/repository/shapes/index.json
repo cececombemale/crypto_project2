@@ -1,5 +1,57 @@
 [
   {
+    "name": "crypto_AES",
+    "tags": [
+      "crypto",
+      "AES"
+    ],
+    "version": "local-version",
+    "basename": "AES.js",
+    "displayName": "AES",
+    "basedir": "crypto",
+    "filePath": "crypto/AES.shape",
+    "image": "crypto/AES.png"
+  },
+  {
+    "name": "crypto_EccDecrypt",
+    "tags": [
+      "crypto",
+      "EccDecrypt"
+    ],
+    "version": "local-version",
+    "basename": "EccDecrypt.js",
+    "displayName": "EccDecrypt",
+    "basedir": "crypto",
+    "filePath": "crypto/EccDecrypt.shape",
+    "image": "crypto/EccDecrypt.png"
+  },
+  {
+    "name": "crypto_EccEncrypt",
+    "tags": [
+      "crypto",
+      "EccEncrypt"
+    ],
+    "version": "local-version",
+    "basename": "EccEncrypt.js",
+    "displayName": "EccEncrypt",
+    "basedir": "crypto",
+    "filePath": "crypto/EccEncrypt.shape",
+    "image": "crypto/EccEncrypt.png"
+  },
+  {
+    "name": "crypto_EccKeyGen",
+    "tags": [
+      "crypto",
+      "EccKeyGen"
+    ],
+    "version": "local-version",
+    "basename": "EccKeyGen.js",
+    "displayName": "EccKeyGen",
+    "basedir": "crypto",
+    "filePath": "crypto/EccKeyGen.shape",
+    "image": "crypto/EccKeyGen.png"
+  },
+  {
     "name": "crypto_HMAC",
     "tags": [
       "crypto",
@@ -52,6 +104,22 @@
     "basedir": "db",
     "filePath": "db/add_key_value.shape",
     "image": "db/add_key_value.png"
+  },
+  {
+    "name": "db_Retrieve_hash_from_DB",
+    "tags": [
+      "db",
+      "Retrieve",
+      "hash",
+      "from",
+      "DB"
+    ],
+    "version": "local-version",
+    "basename": "Retrieve_hash_from_DB.js",
+    "displayName": "Retrieve_hash_from_DB",
+    "basedir": "db",
+    "filePath": "db/Retrieve_hash_from_DB.shape",
+    "image": "db/Retrieve_hash_from_DB.png"
   },
   {
     "name": "documentation_Markdown",

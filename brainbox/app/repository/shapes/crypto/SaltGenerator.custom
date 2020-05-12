@@ -37,8 +37,8 @@ crypto_SaltGenerator = crypto_SaltGenerator.extend({
     {
         var output = this.getOutputPort("output");
         var salt = 100+Math.floor(Math.random()*900);
-        output.setValue(salt);
-        console.log("this is salt", salt);
+        output.setValue(salt.toString(10));
+
     },
 
     /**

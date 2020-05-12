@@ -3,8 +3,8 @@
     {
       "type": "shape_designer.figure.PolyRect",
       "id": "05e32e78-0e16-4bfd-b7f9-8ec049fafb1b",
-      "x": 316,
-      "y": 130.5,
+      "x": 7849.5,
+      "y": 7871.5,
       "width": 301,
       "height": 257,
       "alpha": 1,
@@ -14,8 +14,11 @@
       "userData": {
         "name": "Rectangle",
         "baseClass": "draw2d.SetFigure",
-        "code": "/**\n * Generated Code for the Draw2D touch HTML5 lib.\n * File will be generated if you save the *.shape file.\n *\n * by 'Draw2D Shape Designer'\n *\n * Custom JS code to tweak the standard behaviour of the generated\n * shape. add your custom code and event handler here.\n *\n * Looks disconcerting - extending my own class. But this is a good method to\n * merge basic code and override them with custom methods.\n */\ntestShape = testShape.extend({\n\n    init: function(attr, setter, getter){\n         this._super(attr, setter, getter);\n\n         // your special code here\n    },\n\n    /**\n     *  Called by the simulator for every calculation\n     *  loop\n     *  @param {Object} context context where objects can store or handover global variables to other objects.\n     *  @required\n     **/\n    calculate:function( context)\n    {\n        var db = this.getInputPort(\"db\").getValue();\n        var key = this.getInputPort(\"key\").getValue();\n        var value = this.getInputPort(\"value\").getValue();\n        var modified_db_port = this.getOutputPort(\"modified_db\");\n        var modified_db = {};\n    \n        if(typeof db === \"object\"){\n        \n            for(var k in db){\n                modified_db[k] = db[k];\n            }\n            modified_db[key] = value;\n        \n            modified_db_port.setValue(modified_db);\n        }\n    },\n\n\n    /**\n     *  Called if the simulation mode is starting\n     *  @required\n     **/\n    onStart:function( context )\n    {\n    },\n\n    /**\n     *  Called if the simulation mode is stopping\n     *  @required\n     **/\n    onStop:function( context )\n    {\n    },\n\n    /**\n     * Get the simulator a hint which kind of hardware the shapes requires or supports\n     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost\n     * and your are running a circuit which needs this kind of hardware...\n     **/\n    getRequiredHardware: function(){\n      return {\n        raspi: false,\n        arduino: false\n      }\n    }\n\n});",
-        "markdown": "# Add to DB\nTakes a dict (database), a key, and a value as inputs and outputs another dict which is same as the database, except that it also contains the given key value pair."
+        "code": "/**\n * Generated Code for the Draw2D touch HTML5 lib.\n * File will be generated if you save the *.shape file.\n *\n * by 'Draw2D Shape Designer'\n *\n * Custom JS code to tweak the standard behaviour of the generated\n * shape. add your custom code and event handler here.\n *\n * Looks disconcerting - extending my own class. But this is a good method to\n * merge basic code and override them with custom methods.\n */\ntestShape = testShape.extend({\n\n    init: function(attr, setter, getter){\n         this._super(attr, setter, getter);\n         var db_value={};\n         //this.db = {};\n\n         // your special code here\n    },\n\n    /**\n     *  Called by the simulator for every calculation\n     *  loop\n     *  @param {Object} context context where objects can store or handover global variables to other objects.\n     *  @required\n     **/\n    calculate:function( context)\n    {\n        var db = this.getInputPort(\"db\").getValue();\n        var key = this.getInputPort(\"key\").getValue();\n        var value = this.getInputPort(\"value\").getValue();\n        var modified_db_port = this.getOutputPort(\"modified_db\");\n        var modified_db = {};\n    \n        if(typeof db === \"object\"){\n        \n            for(var k in db){\n                modified_db[k] = db[k];\n            }\n            modified_db[key] = value;\n            \n            db_value = modified_db;\n        \n            modified_db_port.setValue(modified_db);\n        }\n        \n    },\n\n\n    /**\n     *  Called if the simulation mode is starting\n     *  @required\n     **/\n    onStart:function( context )\n    {\n        \n    },\n\n    /**\n     *  Called if the simulation mode is stopping\n     *  @required\n     **/\n    onStop:function( context )\n    {\n    },\n\n    /**\n     * Get the simulator a hint which kind of hardware the shapes requires or supports\n     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost\n     * and your are running a circuit which needs this kind of hardware...\n     **/\n    getRequiredHardware: function(){\n      return {\n        raspi: false,\n        arduino: false\n      }\n    }\n\n});",
+        "markdown": "# Add to DB\nTakes a dict (database), a key, and a value as inputs and outputs another dict which is same as the database, except that it also contains the given key value pair.",
+        "type": "Input",
+        "direction": 0,
+        "fanout": 20
       },
       "cssClass": "shape_designer_figure_PolyRect",
       "ports": [],
@@ -26,20 +29,20 @@
       "dasharray": null,
       "vertices": [
         {
-          "x": 316,
-          "y": 130.5
+          "x": 7849.5,
+          "y": 7871.5
         },
         {
-          "x": 617,
-          "y": 130.5
+          "x": 8150.5,
+          "y": 7871.5
         },
         {
-          "x": 617,
-          "y": 387.5
+          "x": 8150.5,
+          "y": 8128.5
         },
         {
-          "x": 316,
-          "y": 387.5
+          "x": 7849.5,
+          "y": 8128.5
         }
       ],
       "blur": 0,
@@ -61,8 +64,8 @@
     {
       "type": "shape_designer.figure.ExtPort",
       "id": "1a949e8d-faf7-69db-752b-557752d9f93b",
-      "x": 310,
-      "y": 175,
+      "x": 7843.5,
+      "y": 7916,
       "width": 10,
       "height": 10,
       "alpha": 1,
@@ -99,8 +102,8 @@
     {
       "type": "shape_designer.figure.ExtPort",
       "id": "de9b39b7-87b3-2c86-9be5-a785556559a9",
-      "x": 310,
-      "y": 237,
+      "x": 7843.5,
+      "y": 7978,
       "width": 10,
       "height": 10,
       "alpha": 1,
@@ -137,8 +140,8 @@
     {
       "type": "shape_designer.figure.ExtPort",
       "id": "aac0db79-a5a2-bad4-c597-aec7bfa42d03",
-      "x": 310,
-      "y": 303,
+      "x": 7843.5,
+      "y": 8044,
       "width": 10,
       "height": 10,
       "alpha": 1,
@@ -175,8 +178,8 @@
     {
       "type": "shape_designer.figure.ExtLabel",
       "id": "d489e5f4-770c-4944-306e-455c3fc0cfe1",
-      "x": 325,
-      "y": 166,
+      "x": 7858.5,
+      "y": 7907,
       "width": 28.34375,
       "height": 21,
       "alpha": 1,
@@ -215,9 +218,9 @@
     {
       "type": "shape_designer.figure.ExtLabel",
       "id": "4d20b4c9-0008-a074-911e-761bce346891",
-      "x": 323.6640625,
-      "y": 228,
-      "width": 28.34375,
+      "x": 7857.1640625,
+      "y": 7969,
+      "width": 52.515625,
       "height": 21,
       "alpha": 1,
       "selectable": true,
@@ -233,7 +236,7 @@
       "stroke": 0,
       "radius": 0,
       "dasharray": null,
-      "text": "key",
+      "text": "username",
       "outlineStroke": 0,
       "outlineColor": "rgba(0,0,0,0)",
       "fontSize": 16,
@@ -255,9 +258,9 @@
     {
       "type": "shape_designer.figure.ExtLabel",
       "id": "81f0ca1b-db65-2681-c530-a072a3a1da29",
-      "x": 323.6640625,
-      "y": 294,
-      "width": 28.34375,
+      "x": 7857.1640625,
+      "y": 8036,
+      "width": 50.8125,
       "height": 21,
       "alpha": 1,
       "selectable": true,
@@ -273,7 +276,7 @@
       "stroke": 0,
       "radius": 0,
       "dasharray": null,
-      "text": "value",
+      "text": "password",
       "outlineStroke": 0,
       "outlineColor": "rgba(0,0,0,0)",
       "fontSize": 16,
@@ -295,8 +298,8 @@
     {
       "type": "shape_designer.figure.ExtPort",
       "id": "eb70d921-0601-7ed5-c327-91c6edfa9bb4",
-      "x": 611.5,
-      "y": 254.5,
+      "x": 8145,
+      "y": 7995.5,
       "width": 10,
       "height": 10,
       "alpha": 1,
@@ -333,9 +336,9 @@
     {
       "type": "shape_designer.figure.ExtLabel",
       "id": "c7e8abd9-7e53-4ea6-a477-cc618eb5bf38",
-      "x": 510.828125,
-      "y": 245,
-      "width": 28.34375,
+      "x": 8044.328125,
+      "y": 7986,
+      "width": 62.5,
       "height": 21,
       "alpha": 1,
       "selectable": true,
@@ -373,9 +376,9 @@
     {
       "type": "shape_designer.figure.ExtLabel",
       "id": "b8e548bb-de9e-f7d4-df38-18ab0e824e22",
-      "x": 400,
-      "y": 199.5,
-      "width": 28.34375,
+      "x": 7933.5,
+      "y": 7940.5,
+      "width": 54,
       "height": 21,
       "alpha": 1,
       "selectable": true,

@@ -59,7 +59,7 @@ var crypto_HMAC = CircuitFigure.extend({
        
        // Label
        shape = this.canvas.paper.text(0,0,'HMAC');
-       shape.attr({"x":97.9453125,"y":96.5,"text-anchor":"start","text":"HMAC","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":97.9453125,"y":99,"text-anchor":"start","text":"HMAC","font-family":"\"Arial\"","font-size":20,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
@@ -70,6 +70,11 @@ var crypto_HMAC = CircuitFigure.extend({
        // Label
        shape = this.canvas.paper.text(0,0,'Message');
        shape.attr({"x":10,"y":52.6875,"text-anchor":"start","text":"Message","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Output');
+       shape.attr({"x":187.609375,"y":91.78125,"text-anchor":"start","text":"Output","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
 
@@ -105,13 +110,7 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     calculate:function( context)
     {
-        var keyin = this.getInputPort("Key").getValue();
-        var message = this.getInputPort("Message").getValue();
-        var output = this.getOutputPort("Output");
-        var key = sjcl.codec.utf8String.toBits(keyin);
-        var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
-        var hmac = sjcl.codec.hex.fromBits(out)
-        output.setValue(hmac);
+       
     },
 
 
@@ -121,6 +120,18 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     onStart:function( context )
     {
+        var keyin = this.getInputPort("Key").getValue();
+        if(keyin === true || keyin === false || keyin === null) {
+            keyin = sjcl.random.randomWords(8)
+        }
+        var message = this.getInputPort("Message").getValue();
+        if(message !== true && message !== false && message !== null) {
+            var output = this.getOutputPort("Output");
+            var key = sjcl.codec.utf8String.toBits(keyin);
+            var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
+            var hmac = sjcl.codec.hex.fromBits(out)
+            output.setValue(hmac);
+        }
     },
 
     /**

@@ -13,10 +13,10 @@ var crypto_SaltGenerator = CircuitFigure.extend({
    {
      var _this = this;
 
-     this._super( $.extend({stroke:0, bgColor:null, width:204,height:98},attr), setter, getter);
+     this._super( $.extend({stroke:0, bgColor:null, width:131,height:67},attr), setter, getter);
      var port;
      // output
-     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100, y: 50 }));
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100.76335877862596, y: 50 }));
      port.setConnectionDirection(1);
      port.setBackgroundColor("#37B1DE");
      port.setName("output");
@@ -26,8 +26,8 @@ var crypto_SaltGenerator = CircuitFigure.extend({
    createShapeElement : function()
    {
       var shape = this._super();
-      this.originalWidth = 204;
-      this.originalHeight= 98;
+      this.originalWidth = 131;
+      this.originalHeight= 67;
       return shape;
    },
 
@@ -36,18 +36,18 @@ var crypto_SaltGenerator = CircuitFigure.extend({
        this.canvas.paper.setStart();
        var shape = null;
        // BoundingBox
-       shape = this.canvas.paper.path("M0,0 L204,0 L204,98 L0,98");
+       shape = this.canvas.paper.path("M0,0 L131,0 L131,67 L0,67");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
        
        // Rectangle
-       shape = this.canvas.paper.path('M0 0L204 0L204 98L0 98Z');
+       shape = this.canvas.paper.path('M0 0L131 0L131 67L0 67Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
        
        // Label
        shape = this.canvas.paper.text(0,0,'SaltGen');
-       shape.attr({"x":67,"y":47.5,"text-anchor":"start","text":"SaltGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":38,"y":33,"text-anchor":"start","text":"SaltGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
 
@@ -94,8 +94,8 @@ crypto_SaltGenerator = crypto_SaltGenerator.extend({
     {
         var output = this.getOutputPort("output");
         var salt = 100+Math.floor(Math.random()*900);
-        output.setValue(salt);
-        console.log("this is salt", salt);
+        output.setValue(salt.toString(10));
+
     },
 
     /**

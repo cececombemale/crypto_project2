@@ -26,13 +26,7 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     calculate:function( context)
     {
-        var keyin = this.getInputPort("Key").getValue();
-        var message = this.getInputPort("Message").getValue();
-        var output = this.getOutputPort("Output");
-        var key = sjcl.codec.utf8String.toBits(keyin);
-        var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
-        var hmac = sjcl.codec.hex.fromBits(out)
-        output.setValue(hmac);
+       
     },
 
 
@@ -42,6 +36,18 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     onStart:function( context )
     {
+        var keyin = this.getInputPort("Key").getValue();
+        if(keyin === true || keyin === false || keyin === null) {
+            keyin = sjcl.random.randomWords(8)
+        }
+        var message = this.getInputPort("Message").getValue();
+        if(message !== true && message !== false && message !== null) {
+            var output = this.getOutputPort("Output");
+            var key = sjcl.codec.utf8String.toBits(keyin);
+            var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
+            var hmac = sjcl.codec.hex.fromBits(out)
+            output.setValue(hmac);
+        }
     },
 
     /**

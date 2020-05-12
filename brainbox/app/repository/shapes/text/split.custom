@@ -29,7 +29,7 @@ text_split = text_split.extend({
         var left_length = this.getInputPort("split_input_left_length").getValue();
         var left = this.getOutputPort("split_output_left");
         var right = this.getOutputPort("split_output_right");
-        if (txt.substr) {
+        if(txt !== null && txt.substr) {
             left.setValue(txt.substr(0, left_length));
             right.setValue(txt.substr(left_length));
         }

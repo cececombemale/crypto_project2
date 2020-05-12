@@ -112,7 +112,9 @@ text_concatenate = text_concatenate.extend({
         let first = this.getInputPort("first").getValue();
         let last = this.getInputPort("last").getValue();
         let outputPort = this.getOutputPort("output")
-      
+        console.log(first);
+        console.log(last);
+        console.log(first+last);
         outputPort.setValue(first + last);  
     },
 

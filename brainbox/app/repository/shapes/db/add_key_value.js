@@ -69,13 +69,13 @@ var db_add_key_value = CircuitFigure.extend({
        shape.data("name","Label");
        
        // Label
-       shape = this.canvas.paper.text(0,0,'key');
-       shape.attr({"x":11.6640625,"y":110.1875,"text-anchor":"start","text":"key","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape = this.canvas.paper.text(0,0,'username');
+       shape.attr({"x":11.6640625,"y":110,"text-anchor":"start","text":"username","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
-       shape = this.canvas.paper.text(0,0,'value');
-       shape.attr({"x":11.6640625,"y":176,"text-anchor":"start","text":"value","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape = this.canvas.paper.text(0,0,'password');
+       shape.attr({"x":11.6640625,"y":177.09375,"text-anchor":"start","text":"password","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
@@ -109,6 +109,8 @@ db_add_key_value = db_add_key_value.extend({
 
     init: function(attr, setter, getter){
          this._super(attr, setter, getter);
+         var db_value={};
+         //this.db = {};
 
          // your special code here
     },
@@ -133,9 +135,12 @@ db_add_key_value = db_add_key_value.extend({
                 modified_db[k] = db[k];
             }
             modified_db[key] = value;
+            
+            db_value = modified_db;
         
             modified_db_port.setValue(modified_db);
         }
+        
     },
 
 
@@ -145,6 +150,7 @@ db_add_key_value = db_add_key_value.extend({
      **/
     onStart:function( context )
     {
+        
     },
 
     /**

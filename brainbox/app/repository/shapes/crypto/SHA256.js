@@ -101,9 +101,11 @@ crypto_SHA256 = crypto_SHA256.extend({
     {
         var input = this.getInputPort(0).getValue();
         var output = this.getOutputPort(0);
-        var bitArray = sjcl.hash.sha256.hash(input);  
-        var hash = sjcl.codec.hex.fromBits(bitArray);
-        output.setValue(hash);
+        if(input !== true && input !== false && input !== null) {
+            var bitArray = sjcl.hash.sha256.hash(input);  
+            var hash = sjcl.codec.hex.fromBits(bitArray);
+            output.setValue(hash);
+        }
     },
 
 
@@ -113,6 +115,7 @@ crypto_SHA256 = crypto_SHA256.extend({
      **/
     onStart:function( context )
     {
+        
     },
 
     /**

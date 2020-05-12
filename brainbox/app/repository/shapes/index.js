@@ -4,6 +4,709 @@
 // created with http://www.draw2d.org
 //
 //
+var crypto_AES = CircuitFigure.extend({
+
+   NAME: "crypto_AES",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:425,height:107},attr), setter, getter);
+     var port;
+     // Message
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 0, y: 79.73130841121495 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Message");
+     port.setMaxFanOut(20);
+     // Key
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 0, y: 29.979556074766354 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Key");
+     port.setMaxFanOut(20);
+     // encrypt_out
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 30.05514705882353, y: 51.86915887850467 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("encrypt_out");
+     port.setMaxFanOut(20);
+     // display_out
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 30.05514705882353, y: 75.02920560747664 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("display_out");
+     port.setMaxFanOut(20);
+     // decrypt_in
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 69.88235294117646, y: 47.19626168224299 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("decrypt_in");
+     port.setMaxFanOut(20);
+     // decrypt_out
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100, y: 47.19626168224299 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("decrypt_out");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 425;
+      this.originalHeight= 107;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L425,0 L425,107 L0,107");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 6L128 6L128 107L0 107Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'AES Encrypt');
+       shape.attr({"x":23.0546875,"y":55.6875,"text-anchor":"start","text":"AES Encrypt","font-family":"\"Arial\"","font-size":14,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M297 0L425 0L425 101L297 101Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'AES Decrypt');
+       shape.attr({"x":318.0546875,"y":50.6875,"text-anchor":"start","text":"AES Decrypt","font-family":"\"Arial\"","font-size":14,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Message');
+       shape.attr({"x":10,"y":85.890625,"text-anchor":"start","text":"Message","font-family":"\"Arial\"","font-size":11,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Key (Hybrid)');
+       shape.attr({"x":9,"y":32.078125,"text-anchor":"start","text":"Key (Hybrid)","font-family":"\"Arial\"","font-size":11,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+crypto_AES = crypto_AES.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+        var input_one = this.getInputPort("Message").getValue();
+        var option_key = this.getInputPort("Key").getValue();
+        var output_one = this.getOutputPort("encrypt_out");
+        var display = this.getOutputPort("display_out");
+        
+        //console.log(input_one)
+        
+        if (input_one.substr){
+            //sjcl.beware["CBC mode is dangerous because it doesn't protect message integrity."]();
+            
+            //var prp = new sjcl.cipher.aes();
+            //var cipher_text = sjcl.mode.cbc.encrypt(prp, plaintext);
+            
+            if (option_key === true) {
+                var cipher_text = sjcl.encrypt("password",input_one);
+            }
+            else {
+                var key_make = sjcl.codec.hex.fromBits(option_key);
+                var cipher_text = sjcl.encrypt(key_make,input_one);
+            }
+            
+            
+            output_one.setValue(cipher_text);
+            var input_two = this.getInputPort("decrypt_in").getValue();
+            
+            //var output_cipher= this.getOutputPort("display_out");
+            //output_cipher.setValue(jso.substring(index+6, jso.length-4));
+            if ((input_two !== true) && (input_two !== false)){
+                if (option_key === true) {
+                    var decrypted_message = sjcl.decrypt("password", cipher_text);
+                }
+                else {
+                    var decrypted_message = sjcl.decrypt(key_make, cipher_text);
+                }
+                var output_two = this.getOutputPort("decrypt_out");
+                output_two.setValue(decrypted_message);
+                var jso = JSON.stringify(cipher_text);
+                var index = jso.indexOf("ct");
+                display.setValue(jso.substring(index+6, jso.length-4));
+            }
+        }
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
+var crypto_EccDecrypt = CircuitFigure.extend({
+
+   NAME: "crypto_EccDecrypt",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:163,height:90},attr), setter, getter);
+     var port;
+     // InputCiphertext
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 101.22699386503068, y: 45.51215277777778 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("InputCiphertext");
+     port.setMaxFanOut(20);
+     // InputSecret
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 49.38650306748466, y: -1.1111111111111112 }));
+     port.setConnectionDirection(0);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("InputSecret");
+     port.setMaxFanOut(20);
+     // Plaintext
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 49.38650306748466, y: 100 }));
+     port.setConnectionDirection(2);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Plaintext");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 163;
+      this.originalHeight= 90;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L163,0 L163,90 L0,90");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 0L163 0L163 90L0 90Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'ECC Decrypt');
+       shape.attr({"x":33.8203125,"y":40.6875,"text-anchor":"start","text":"ECC Decrypt","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+crypto_EccDecrypt = crypto_EccDecrypt.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+        
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+        var secretkey = this.getInputPort("InputSecret").getValue();
+        var cipher = this.getInputPort("InputCiphertext").getValue();
+        if(secretkey!==true && secretkey!==false) {
+            var plaintext = this.getOutputPort("Plaintext");
+            if (cipher !==true && cipher !==false && cipher !==null){
+                var val = sjcl.decrypt(secretkey.sec, cipher);
+                plaintext.setValue(val);
+            }
+            
+        }
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
+var crypto_EccEncrypt = CircuitFigure.extend({
+
+   NAME: "crypto_EccEncrypt",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:438,height:102},attr), setter, getter);
+     var port;
+     // Plaintext
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 16.666666666666664, y: -0.942095588235294 }));
+     port.setConnectionDirection(0);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Plaintext");
+     port.setMaxFanOut(20);
+     // Ciphertext
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 40.86757990867579, y: 42.19515931372549 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Ciphertext");
+     port.setMaxFanOut(20);
+     // InputKey
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 24.429223744292237, y: -0.942095588235294 }));
+     port.setConnectionDirection(0);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("InputKey");
+     port.setMaxFanOut(20);
+     // Input_Cipher
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 58.67579908675799, y: 42.19515931372549 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Input_Cipher");
+     port.setMaxFanOut(20);
+     // Private_Key
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 79.90867579908675, y: -0.942095588235294 }));
+     port.setConnectionDirection(0);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Private_Key");
+     port.setMaxFanOut(20);
+     // Output_Plain
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100, y: 50 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Output_Plain");
+     port.setMaxFanOut(20);
+     // Ciphertext2
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 40.86757990867579, y: 68.6657475490196 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("Ciphertext2");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 438;
+      this.originalHeight= 102;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L438,0 L438,102 L0,102");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 0L180 0L180 102L0 102Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'ECC Encrypt');
+       shape.attr({"x":43.765625,"y":50.7265625,"text-anchor":"start","text":"ECC Encrypt","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M258 0L438 0L438 102L258 102Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'ECC Decrypt');
+       shape.attr({"x":305,"y":49.6875,"text-anchor":"start","text":"ECC Decrypt","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+crypto_EccEncrypt = crypto_EccEncrypt.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+         
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+       
+        
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+        
+         var pair = this.getInputPort("InputKey").getValue();
+        var dummy = this.getInputPort("Private_Key").getValue();
+        var plaintext = this.getInputPort("Plaintext").getValue();
+        if (pair!==true && pair!==false) {
+            var c = sjcl.encrypt(pair.pub, plaintext);
+            
+            var p = sjcl.decrypt(pair.sec, c);
+            console.log("cipher ",c);
+            console.log("plain ",p);
+            var cipher = this.getOutputPort("Ciphertext");
+            var cipher2 = this.getOutputPort("Ciphertext2");
+            
+            
+            
+            cipher.setValue(p);
+            
+            
+            var decrypt_in = this.getInputPort("Input_Cipher").getValue();
+            //console.log("Here" , decrypt_in);
+            if (decrypt_in!==true && decrypt_in!==false && decrypt_in!== null) {
+                //var plain = sjcl.decrypt(pair.sec, decrypt_in);
+                var out = this.getOutputPort("Output_Plain");
+                var jso = JSON.stringify(c);
+                var index = jso.indexOf("ct");
+                out.setValue(p);
+                cipher2.setValue(jso.substring(index+6, jso.length-4));
+            }
+            
+                
+        }
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
+var crypto_EccKeyGen = CircuitFigure.extend({
+
+   NAME: "crypto_EccKeyGen",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:183,height:108},attr), setter, getter);
+     var port;
+     // OutputKey
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 46.44808743169399, y: 100 }));
+     port.setConnectionDirection(2);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("OutputKey");
+     port.setMaxFanOut(20);
+     // OutputSecret
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 69.94535519125684, y: 100 }));
+     port.setConnectionDirection(2);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("OutputSecret");
+     port.setMaxFanOut(20);
+     // OutputDH
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 21.584699453551913, y: 100 }));
+     port.setConnectionDirection(2);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("OutputDH");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 183;
+      this.originalHeight= 108;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L183,0 L183,108 L0,108");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 0L183 0L183 108L0 108Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'ECCKeyGen');
+       shape.attr({"x":44.703125,"y":46.6875,"text-anchor":"start","text":"ECCKeyGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+crypto_EccKeyGen = crypto_EccKeyGen.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+        
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+        var pair = sjcl.ecc.elGamal.generateKeys(256);
+        var pair2 = sjcl.ecc.elGamal.generateKeys(384);
+        //var pubkem = pair.pub.kem();
+        //var pubkey = pubkem.key;
+        //var seckey = pair.sec.unkem(pubkem.tag);
+        
+        
+        //var pub = pair.pub.get();
+        //var sec = pair.sec.get();
+        
+        //var pub = pair.pub;
+        //var sec = pair.sec;
+        var output = this.getOutputPort("OutputKey");
+        var output2 = this.getOutputPort("OutputSecret");
+        var outputDh = this.getOutputPort("OutputDH");
+        //var ci = sjcl.encrypt(pair2.pub,"hiiiiii")
+        output.setValue(pair2);
+        output2.setValue(pair2);
+        var val = pair.sec.dh(pair.pub);
+        outputDh.setValue(val); 
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
 var crypto_HMAC = CircuitFigure.extend({
 
    NAME: "crypto_HMAC",
@@ -59,7 +762,7 @@ var crypto_HMAC = CircuitFigure.extend({
        
        // Label
        shape = this.canvas.paper.text(0,0,'HMAC');
-       shape.attr({"x":97.9453125,"y":96.5,"text-anchor":"start","text":"HMAC","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":97.9453125,"y":99,"text-anchor":"start","text":"HMAC","font-family":"\"Arial\"","font-size":20,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
@@ -70,6 +773,11 @@ var crypto_HMAC = CircuitFigure.extend({
        // Label
        shape = this.canvas.paper.text(0,0,'Message');
        shape.attr({"x":10,"y":52.6875,"text-anchor":"start","text":"Message","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Output');
+       shape.attr({"x":187.609375,"y":91.78125,"text-anchor":"start","text":"Output","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
 
@@ -105,13 +813,7 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     calculate:function( context)
     {
-        var keyin = this.getInputPort("Key").getValue();
-        var message = this.getInputPort("Message").getValue();
-        var output = this.getOutputPort("Output");
-        var key = sjcl.codec.utf8String.toBits(keyin);
-        var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
-        var hmac = sjcl.codec.hex.fromBits(out)
-        output.setValue(hmac);
+       
     },
 
 
@@ -121,6 +823,18 @@ crypto_HMAC = crypto_HMAC.extend({
      **/
     onStart:function( context )
     {
+        var keyin = this.getInputPort("Key").getValue();
+        if(keyin === true || keyin === false || keyin === null) {
+            keyin = sjcl.random.randomWords(8)
+        }
+        var message = this.getInputPort("Message").getValue();
+        if(message !== true && message !== false && message !== null) {
+            var output = this.getOutputPort("Output");
+            var key = sjcl.codec.utf8String.toBits(keyin);
+            var out = (new sjcl.misc.hmac(key, sjcl.hash.sha256)).mac(message);
+            var hmac = sjcl.codec.hex.fromBits(out)
+            output.setValue(hmac);
+        }
     },
 
     /**
@@ -161,10 +875,10 @@ var crypto_SaltGenerator = CircuitFigure.extend({
    {
      var _this = this;
 
-     this._super( $.extend({stroke:0, bgColor:null, width:204,height:98},attr), setter, getter);
+     this._super( $.extend({stroke:0, bgColor:null, width:131,height:67},attr), setter, getter);
      var port;
      // output
-     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100, y: 50 }));
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100.76335877862596, y: 50 }));
      port.setConnectionDirection(1);
      port.setBackgroundColor("#37B1DE");
      port.setName("output");
@@ -174,8 +888,8 @@ var crypto_SaltGenerator = CircuitFigure.extend({
    createShapeElement : function()
    {
       var shape = this._super();
-      this.originalWidth = 204;
-      this.originalHeight= 98;
+      this.originalWidth = 131;
+      this.originalHeight= 67;
       return shape;
    },
 
@@ -184,18 +898,18 @@ var crypto_SaltGenerator = CircuitFigure.extend({
        this.canvas.paper.setStart();
        var shape = null;
        // BoundingBox
-       shape = this.canvas.paper.path("M0,0 L204,0 L204,98 L0,98");
+       shape = this.canvas.paper.path("M0,0 L131,0 L131,67 L0,67");
        shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
        shape.data("name","BoundingBox");
        
        // Rectangle
-       shape = this.canvas.paper.path('M0 0L204 0L204 98L0 98Z');
+       shape = this.canvas.paper.path('M0 0L131 0L131 67L0 67Z');
        shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
        shape.data("name","Rectangle");
        
        // Label
        shape = this.canvas.paper.text(0,0,'SaltGen');
-       shape.attr({"x":67,"y":47.5,"text-anchor":"start","text":"SaltGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.attr({"x":38,"y":33,"text-anchor":"start","text":"SaltGen","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
 
@@ -242,8 +956,8 @@ crypto_SaltGenerator = crypto_SaltGenerator.extend({
     {
         var output = this.getOutputPort("output");
         var salt = 100+Math.floor(Math.random()*900);
-        output.setValue(salt);
-        console.log("this is salt", salt);
+        output.setValue(salt.toString(10));
+
     },
 
     /**
@@ -372,9 +1086,11 @@ crypto_SHA256 = crypto_SHA256.extend({
     {
         var input = this.getInputPort(0).getValue();
         var output = this.getOutputPort(0);
-        var bitArray = sjcl.hash.sha256.hash(input);  
-        var hash = sjcl.codec.hex.fromBits(bitArray);
-        output.setValue(hash);
+        if(input !== true && input !== false && input !== null) {
+            var bitArray = sjcl.hash.sha256.hash(input);  
+            var hash = sjcl.codec.hex.fromBits(bitArray);
+            output.setValue(hash);
+        }
     },
 
 
@@ -384,6 +1100,7 @@ crypto_SHA256 = crypto_SHA256.extend({
      **/
     onStart:function( context )
     {
+        
     },
 
     /**
@@ -480,13 +1197,13 @@ var db_add_key_value = CircuitFigure.extend({
        shape.data("name","Label");
        
        // Label
-       shape = this.canvas.paper.text(0,0,'key');
-       shape.attr({"x":11.6640625,"y":110.1875,"text-anchor":"start","text":"key","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape = this.canvas.paper.text(0,0,'username');
+       shape.attr({"x":11.6640625,"y":110,"text-anchor":"start","text":"username","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
-       shape = this.canvas.paper.text(0,0,'value');
-       shape.attr({"x":11.6640625,"y":176,"text-anchor":"start","text":"value","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape = this.canvas.paper.text(0,0,'password');
+       shape.attr({"x":11.6640625,"y":177.09375,"text-anchor":"start","text":"password","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
        shape.data("name","Label");
        
        // Label
@@ -520,6 +1237,8 @@ db_add_key_value = db_add_key_value.extend({
 
     init: function(attr, setter, getter){
          this._super(attr, setter, getter);
+         var db_value={};
+         //this.db = {};
 
          // your special code here
     },
@@ -544,8 +1263,162 @@ db_add_key_value = db_add_key_value.extend({
                 modified_db[k] = db[k];
             }
             modified_db[key] = value;
+            
+            db_value = modified_db;
         
             modified_db_port.setValue(modified_db);
+        }
+        
+    },
+
+
+    /**
+     *  Called if the simulation mode is starting
+     *  @required
+     **/
+    onStart:function( context )
+    {
+        
+    },
+
+    /**
+     *  Called if the simulation mode is stopping
+     *  @required
+     **/
+    onStop:function( context )
+    {
+    },
+
+    /**
+     * Get the simulator a hint which kind of hardware the shapes requires or supports
+     * This helps the simulator to bring up some dialogs and messages if any new hardware is connected/get lost
+     * and your are running a circuit which needs this kind of hardware...
+     **/
+    getRequiredHardware: function(){
+      return {
+        raspi: false,
+        arduino: false
+      }
+    }
+
+});
+
+
+// Generated Code for the Draw2D touch HTML5 lib.
+// File will be generated if you save the *.shape file.
+//
+// created with http://www.draw2d.org
+//
+//
+var db_Retrieve_hash_from_DB = CircuitFigure.extend({
+
+   NAME: "db_Retrieve_hash_from_DB",
+   VERSION: "local-version",
+
+   init:function(attr, setter, getter)
+   {
+     var _this = this;
+
+     this._super( $.extend({stroke:0, bgColor:null, width:263,height:224},attr), setter, getter);
+     var port;
+     // DB
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 0, y: 28.125001702989852 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("DB");
+     port.setMaxFanOut(20);
+     // username
+     port = this.addPort(new DecoratedInputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 0, y: 70.53571598870414 }));
+     port.setConnectionDirection(3);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("username");
+     port.setMaxFanOut(20);
+     // hash
+     port = this.addPort(new DecoratedOutputPort(), new draw2d.layout.locator.XYRelPortLocator({x: 100.76045627376425, y: 50 }));
+     port.setConnectionDirection(1);
+     port.setBackgroundColor("#37B1DE");
+     port.setName("hash");
+     port.setMaxFanOut(20);
+   },
+
+   createShapeElement : function()
+   {
+      var shape = this._super();
+      this.originalWidth = 263;
+      this.originalHeight= 224;
+      return shape;
+   },
+
+   createSet: function()
+   {
+       this.canvas.paper.setStart();
+       var shape = null;
+       // BoundingBox
+       shape = this.canvas.paper.path("M0,0 L263,0 L263,224 L0,224");
+       shape.attr({"stroke":"none","stroke-width":0,"fill":"none"});
+       shape.data("name","BoundingBox");
+       
+       // Rectangle
+       shape = this.canvas.paper.path('M0 0L263 0L263 224L0 224Z');
+       shape.attr({"stroke":"rgba(48,48,48,1)","stroke-width":1,"fill":"rgba(255,255,255,1)","dasharray":null,"stroke-dasharray":null,"opacity":1});
+       shape.data("name","Rectangle");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'DB');
+       shape.attr({"x":17,"y":61.609378814697266,"text-anchor":"start","text":"DB","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Username');
+       shape.attr({"x":13,"y":156.60937881469727,"text-anchor":"start","text":"Username","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+       // Label
+       shape = this.canvas.paper.text(0,0,'Retrieve from DB');
+       shape.attr({"x":75,"y":110.609375,"text-anchor":"start","text":"Retrieve from DB","font-family":"\"Arial\"","font-size":16,"stroke":"#000000","fill":"#080808","stroke-scale":true,"font-weight":"normal","stroke-width":0,"opacity":1});
+       shape.data("name","Label");
+       
+
+       return this.canvas.paper.setFinish();
+   }
+});
+
+/**
+ * Generated Code for the Draw2D touch HTML5 lib.
+ * File will be generated if you save the *.shape file.
+ *
+ * by 'Draw2D Shape Designer'
+ *
+ * Custom JS code to tweak the standard behaviour of the generated
+ * shape. add your custom code and event handler here.
+ *
+ * Looks disconcerting - extending my own class. But this is a good method to
+ * merge basic code and override them with custom methods.
+ */
+db_Retrieve_hash_from_DB = db_Retrieve_hash_from_DB.extend({
+
+    init: function(attr, setter, getter){
+         this._super(attr, setter, getter);
+
+         // your special code here
+    },
+
+    /**
+     *  Called by the simulator for every calculation
+     *  loop
+     *  @param {Object} context context where objects can store or handover global variables to other objects.
+     *  @required
+     **/
+    calculate:function( context)
+    {
+        var db = this.getInputPort("DB").getValue();
+        var key = this.getInputPort("username").getValue();
+        var output_port = this.getOutputPort("hash");
+    
+        if(typeof db === "object" && db !== null){
+            
+            output_port.setValue(db[key]);
+
         }
     },
 
@@ -814,7 +1687,9 @@ text_concatenate = text_concatenate.extend({
         let first = this.getInputPort("first").getValue();
         let last = this.getInputPort("last").getValue();
         let outputPort = this.getOutputPort("output")
-      
+        console.log(first);
+        console.log(last);
+        console.log(first+last);
         outputPort.setValue(first + last);  
     },
 
@@ -848,7 +1723,6 @@ text_concatenate = text_concatenate.extend({
     }
 
 });
-
 
 
 // Generated Code for the Draw2D touch HTML5 lib.
@@ -1524,7 +2398,7 @@ text_split = text_split.extend({
         var left_length = this.getInputPort("split_input_left_length").getValue();
         var left = this.getOutputPort("split_output_left");
         var right = this.getOutputPort("split_output_right");
-        if (txt.substr) {
+        if(txt !== null && txt.substr) {
             left.setValue(txt.substr(0, left_length));
             right.setValue(txt.substr(left_length));
         }
