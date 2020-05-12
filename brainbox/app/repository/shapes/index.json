@@ -13,19 +13,6 @@
     "image": "crypto/AES.png"
   },
   {
-    "name": "crypto_EccDecrypt",
-    "tags": [
-      "crypto",
-      "EccDecrypt"
-    ],
-    "version": "local-version",
-    "basename": "EccDecrypt.js",
-    "displayName": "EccDecrypt",
-    "basedir": "crypto",
-    "filePath": "crypto/EccDecrypt.shape",
-    "image": "crypto/EccDecrypt.png"
-  },
-  {
     "name": "crypto_EccEncrypt",
     "tags": [
       "crypto",
