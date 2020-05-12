@@ -35,3 +35,5 @@ yarn dev
 ### Open localhost on your browser
 http://localhost:7400/
 
+### Demonstration of this project
+Check out the demo made available publicly on youtube: https://youtu.be/lduruENDoLw
