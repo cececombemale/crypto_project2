@@ -8,6 +8,14 @@ Expressive Cryptography ft. Brainbox is an interactive GUI where the user can im
 2. Authenticated symmetric cryptography
 3. Authenticated hybrid cryptography
 
+## Group
+1. Ridhima Agarwal
+2. Cecilia Combemale
+3. Ranjitha Gurushanthappa
+4. Michael Kochera
+
+All team members contributed to this project using an ngrok tunnel connected to Ranjitha's localhost.
+
 ## Dependencies
 The project has the following dependencies:
 * Node version: 11.15.0
